@@ -5,87 +5,97 @@ var end = 'end';
 var startEl = document.querySelector("#start");
 var quizEl = document.querySelector("#quiz");
 var endEl = document.querySelector("#end");
-var beginButton = documnet.querySelector("#begin button");
-var title = document.querySelector("#title");
+var beginButton = document.querySelector("#begin-button");
+var myTitle = document.querySelector("#title");
 var timeEl = document.querySelector("#time");
-var contentEl = document.querySelector("#content");
+var questionEl = document.querySelector("#question");
 var choicesEl = document.querySelector("#choices");
+var button1El = document.querySelector("#but1");
+var button2El = document.querySelector("#but2");
+var button3El = document.querySelector("#but3");
+var button4El = document.querySelector("#but4");
 
 var currentQuestion = 0;
 var currentAnswers = 0;
 var quizFinished = false;
+
+
 var questions = [
     {
         question: "What fruit is featured in every episode of the tv series Psych",
         answer: "Pineapple",
         choices: [
-            "Kiwi"
-            "Orange"
-            "Pear"
+            "Kiwi",
+            "Orange",
+            "Pear",
             "Pineapple"
         ]
     }
     ,
+    {
         question: "What is Shawn's best friends name?",
         answer: "Gus",
         choices: [
-            "Ben"
-            "Gus"
-            "Chris"
+            "Ben",
+            "Gus",
+            "Chris",
             "Henry"
         ]
+    }
     ,
-    
+    {
         question: "Who is Shawn's main love interest?",
         answer: "Juliette",
         choices: [
-            "Amy"
-            "Mary"
-            "Juliette"
+            "Amy",
+            "Mary",
+            "Juliette",
             "Abigail"
         ]
+    }
     ,
+    {
     question: "Who is the Chief of Police?",
         answer: "Vick",
         choices: [
-            "Lassiter"
-            "O'Hara"
-            "Vick"
+            "Lassiter",
+            "O'Hara",
+            "Vick",
             "Spencer"
         ]
+    }
     ,
-    
+    {    
         question: "What is Shawn and Gus' catchphrase?",
         answer: "Come on son",
         choices: [
-            "Let's go"
-            "Come on son"
-            "To infinity and beyond"
+            "Let's go",
+            "Come on son",
+            "To infinity and beyond",
             "yolo"
         ]
+    }
 ]
-
 function init(){
+    
     displayState();
 };
 var secondsLeft = 20
 function displayTime(){
-    timeEl.textContent = secondsLeft + "seconds left";
+    timeEl.textContent = secondsLeft + " seconds left";
 }
 function displayQuestion(){
-    var eachQuestion = questions[currentQustion].question
-    contentEl.textContent = eachQuestion
+    var eachQuestion = questions[currentQuestion].question
+    questionEl.textContent = eachQuestion
 
 }
 function displayChoices(){
     var eachChoice = questions[currentQuestion].choices
-    choicesEl.textContent = eachChoice
-    for(var i = 0; i < eachChoice.length; i++){
-        var doc = document.createElement("button")
-        doc.setAttribute("class", "solid")
-        doc.setAttribute("value", "each choice")
-        choicesEl.textContent = eachChoice[i]
-    }
+    button1El.textContent = eachChoice[0]
+    button2El.textContent = eachChoice[1]
+    button3El.textContent = eachChoice[2]
+    button4El.textContent = eachChoice[3]
+
 }
 function displayState(){
     if (state === 'start'){
@@ -117,10 +127,8 @@ beginButton.addEventListener("click", function() {
     }, 1000)
 });
 
-myTitle.addEventListener("click", function() {
-    state = "end"
-    displayState();
-});
+
+
 init();
 
 // GIVEN I am taking a code quiz
