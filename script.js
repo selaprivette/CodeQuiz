@@ -1,7 +1,8 @@
 var state = 'start';
 var quiz = 'quiz';
 var end = 'end';
-
+var answersCorrect =0;
+//establish variables
 var startEl = document.querySelector("#start");
 var quizEl = document.querySelector("#quiz");
 var endEl = document.querySelector("#end");
@@ -14,12 +15,15 @@ var button1El = document.querySelector("#but1");
 var button2El = document.querySelector("#but2");
 var button3El = document.querySelector("#but3");
 var button4El = document.querySelector("#but4");
+var submitButton = document.querySelector("#submit");
+var selectionEl = document.querySelector("#selection");
+var scoreEl = document.querySelector("#score");
 
 var currentQuestion = 0;
 var currentAnswers = 0;
 var quizFinished = false;
 
-
+//questions
 var questions = [
     {
         question: "What fruit is featured in every episode of the tv series Psych",
@@ -55,7 +59,7 @@ var questions = [
     }
     ,
     {
-    question: "Who is the Chief of Police?",
+        question: "Who is the Chief of Police?",
         answer: "Vick",
         choices: [
             "Lassiter",
@@ -65,7 +69,7 @@ var questions = [
         ]
     }
     ,
-    {    
+    {
         question: "What is Shawn and Gus' catchphrase?",
         answer: "Come on son",
         choices: [
@@ -76,20 +80,21 @@ var questions = [
         ]
     }
 ]
-function init(){
-    
+function init() {
+
     displayState();
 };
-var secondsLeft = 20
-function displayTime(){
+var secondsLeft = 30
+function displayTime() {
     timeEl.textContent = secondsLeft + " seconds left";
 }
-function displayQuestion(){
+function displayQuestion() {
     var eachQuestion = questions[currentQuestion].question
     questionEl.textContent = eachQuestion
+    displayChoices();
 
 }
-function displayChoices(){
+function displayChoices() {
     var eachChoice = questions[currentQuestion].choices
     button1El.textContent = eachChoice[0]
     button2El.textContent = eachChoice[1]
@@ -97,39 +102,68 @@ function displayChoices(){
     button4El.textContent = eachChoice[3]
 
 }
-function displayState(){
-    if (state === 'start'){
+function displayState() {
+    if (state === 'start') {
         startEl.style.display = 'block';
         quizEl.style.display = 'none';
         endEl.style.display = 'none';
-    
+
     }
-    if (state === 'quiz'){
+    if (state === 'quiz') {
         startEl.style.display = 'none';
         quizEl.style.display = 'block';
         endEl.style.display = 'none';
-    
+
+    }
+    if (state === 'end') {
+        startEl.style.display = 'none';
+        quizEl.style.display = 'none';
+        endEl.style.display = 'block';
+        scoreEl.textContent = secondsLeft;
     }
 }
-beginButton.addEventListener("click", function() {
+beginButton.addEventListener("click", function () {
     state = "quiz";
     displayState();
     displayTime();
     displayQuestion();
-    displayChoices();
-    var timerInterval = setInterval(function() {
+    
+    var timerInterval = setInterval(function () {
+        if(state!="quiz"){
+            clearInterval(timerInterval);
+        }
         secondsLeft--;
         displayTime();
-        if(secondsLeft === 0){
-            alert("Times up!")
+        if (secondsLeft === 0) {
             clearInterval(timerInterval);
+            state="end"
+            displayState();    
         }
     }, 1000)
 });
 
+selectionEl.addEventListener("click", function(event) {
+    var element = event.target;
 
+    if (element.textContent==questions[currentQuestion].answer) {
+        //evaluate if the answer was correct
+        answersCorrect++;
+    } else {
+        //remove time from timer
+        secondsLeft-=5
+    }
+    if(currentQuestion<4){
+        currentQuestion++
+        displayQuestion();
+    } else {
+        state="end"
+        displayState();
+    }    
+    
+}
+)
 
-init();
+    init();
 
 // GIVEN I am taking a code quiz
 // WHEN I click the start button
