@@ -1,7 +1,7 @@
 var state = 'start';
 var quiz = 'quiz';
 var end = 'end';
-var answersCorrect =0;
+var answersCorrect = 0;
 //establish variables
 var startEl = document.querySelector("#start");
 var quizEl = document.querySelector("#quiz");
@@ -18,7 +18,7 @@ var button4El = document.querySelector("#but4");
 var submitButton = document.querySelector("#submit");
 var selectionEl = document.querySelector("#selection");
 var scoreEl = document.querySelector("#score");
-
+var nameEl = document.querySelector("#playername");
 var currentQuestion = 0;
 var currentAnswers = 0;
 var quizFinished = false;
@@ -127,43 +127,60 @@ beginButton.addEventListener("click", function () {
     displayState();
     displayTime();
     displayQuestion();
-    
+
     var timerInterval = setInterval(function () {
-        if(state!="quiz"){
+        if (state != "quiz") {
             clearInterval(timerInterval);
         }
         secondsLeft--;
         displayTime();
         if (secondsLeft === 0) {
             clearInterval(timerInterval);
-            state="end"
-            displayState();    
+            state = "end"
+            displayState();
         }
     }, 1000)
 });
 
-selectionEl.addEventListener("click", function(event) {
+selectionEl.addEventListener("click", function (event) {
     var element = event.target;
 
-    if (element.textContent==questions[currentQuestion].answer) {
+    if (element.textContent == questions[currentQuestion].answer) {
         //evaluate if the answer was correct
         answersCorrect++;
     } else {
         //remove time from timer
-        secondsLeft-=5
+        secondsLeft -= 5
     }
-    if(currentQuestion<4){
+    if (currentQuestion < 4) {
         currentQuestion++
         displayQuestion();
     } else {
-        state="end"
+        state = "end"
         displayState();
-    }    
-    
+    }
+
 }
 )
+submitButton.addEventListener("click", function () {
+    var scores = JSON.parse(localStorage.getItem("highScore")) || [];
+    // Save related form data as an object
+    var highScore = {
+        playerName: nameEl.value,
+        score: secondsLeft,
+    };
 
-    init();
+    scores.push(highScore);
+
+    // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
+    localStorage.setItem("highScore", JSON.stringify(scores));
+
+})
+function saveLastScore() {
+
+}
+
+init();
 
 // GIVEN I am taking a code quiz
 // WHEN I click the start button

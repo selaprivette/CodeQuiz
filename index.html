@@ -30,12 +30,15 @@
     <section id="end">
         <h3>Game over! Your score was a <span id="score"></span>!</h3>
         <h4> Please enter your name</h4>
-        <label for="name">
-        <inupt type="text" id="name" name= "first-name">
+        <label for="playername"></label>
+        <input id="playername" type="text"></input>
             <button id="submit">Submit</button>
-        </label>
     </section>
+    <div class="card">
+        <h5>High Scores</h5>
+        <p>Player Name: <span id="saved-name"></span></p>
+        <p>Score: <span id="score"></span></p>
+      </div>
     <script type="text/javascript" src="script.js"></script>
 </body>
-
 </html>
