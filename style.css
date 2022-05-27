@@ -1,0 +1,93 @@
+/*universal color codes*/
+:root {
+  --main-color: rgb(199, 88, 162);
+  --background-color: #000000;
+  --alternate-text-color: #e9a4ce;
+}
+
+* {
+  text-align: center;
+}
+
+/*everything in body tag will follow variables*/
+body {
+  background-color: var(--background-color);
+  color: var(--alternate-text-color);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  min-width: 736px;
+}
+
+
+
+section {
+  border: 5px solid var(--alternate-text-color);
+  background-color: var(--main-color);
+  height: 100%;
+}
+
+header {
+  border: 8px solid var(--alternate-text-color)
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  min-width: 300px;
+}
+
+nav a {
+  background-color: var(--background-color);
+  color: var(--alternate-text-color);
+  padding-right: 30px;
+  font-weight: bold;
+  text-decoration: line;
+}
+/*changes color when mouse hovers over*/
+nav a:hover {
+  color: var(--main-color);
+}
+/*image class*/
+.portfolio-image {
+  width: 400px;
+}
+/*image class*/
+.portfolio-image-featured {
+  width: 600px;
+}
+
+
+/*footer display*/
+footer {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  border: 5px solid var(--alternate-text-color);
+  padding: 3%;
+  background-color: var(--main-color);
+  color: var(--alternate-text-color);
+}
+/*changes a tag text color and removes underline*/
+footer a{
+  text-decoration: none;
+  color: var(--alternate-text-color);
+}
+/*changes color when mouse hovers*/
+li:hover {
+  color: var(--background-color);
+}
+/*changes size with screen*/
+@media screen and (max-width: 768px) {
+
+
+  main {
+    max-width: 1200px;
+  }
+
+  .portfolio-image {
+    width: 300px;
+  }
+
+  .portfolio-image-featured {
+    width: 400px;
+  }
+}

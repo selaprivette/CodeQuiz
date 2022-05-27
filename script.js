@@ -6,6 +6,7 @@ var answersCorrect = 0;
 var startEl = document.querySelector("#start");
 var quizEl = document.querySelector("#quiz");
 var endEl = document.querySelector("#end");
+var cardEl = document.querySelector("#card");
 var beginButton = document.querySelector("#begin-button");
 var myTitle = document.querySelector("#title");
 var timeEl = document.querySelector("#time");
@@ -18,7 +19,9 @@ var button4El = document.querySelector("#but4");
 var submitButton = document.querySelector("#submit");
 var selectionEl = document.querySelector("#selection");
 var scoreEl = document.querySelector("#score");
+var restartEl = document.querySelector("#restart");
 var nameEl = document.querySelector("#playername");
+var hsEl = document.querySelector("#high-scores");
 var currentQuestion = 0;
 var currentAnswers = 0;
 var quizFinished = false;
@@ -107,21 +110,42 @@ function displayState() {
         startEl.style.display = 'block';
         quizEl.style.display = 'none';
         endEl.style.display = 'none';
+        cardEl.style.display = 'none';
 
     }
     if (state === 'quiz') {
         startEl.style.display = 'none';
         quizEl.style.display = 'block';
         endEl.style.display = 'none';
-
+        cardEl.style.display = 'none';
     }
     if (state === 'end') {
         startEl.style.display = 'none';
         quizEl.style.display = 'none';
         endEl.style.display = 'block';
+        cardEl.style.display = 'none';
         scoreEl.textContent = secondsLeft;
     }
+    if (state === 'card') {
+        startEl.style.display = 'none';
+        quizEl.style.display = 'none';
+        endEl.style.display = 'none';
+        cardEl.style.display = 'block';
+        generateHighScores();
+    }
 }
+
+function generateHighScores(){
+    var scores = JSON.parse(localStorage.getItem("highScore")) || [];
+    var entry=""    ;
+
+    for(var i=0;i<scores.length;i++){
+        entry=document.createElement("p")
+        entry.textContent=scores[i].playerName+ " scored "+scores[i].score
+        hsEl.appendChild(entry);
+    }
+}
+
 beginButton.addEventListener("click", function () {
     state = "quiz";
     displayState();
@@ -175,7 +199,15 @@ submitButton.addEventListener("click", function () {
     // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
     localStorage.setItem("highScore", JSON.stringify(scores));
 
+    //go to high scores
+    state = "card";
+    displayState();
 })
+
+restartEl.addEventListener("click", function () {
+    window.location.replace("index.html");
+})
+
 function saveLastScore() {
 
 }
