@@ -134,7 +134,7 @@ function displayState() {
         generateHighScores();
     }
 }
-
+//pushes scores to page and makes visible
 function generateHighScores(){
     var scores = JSON.parse(localStorage.getItem("highScore")) || [];
     var entry=""    ;
@@ -196,7 +196,7 @@ submitButton.addEventListener("click", function () {
 
     scores.push(highScore);
 
-    // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
+    //store highscores and JSON.stringify to convert it as a string
     localStorage.setItem("highScore", JSON.stringify(scores));
 
     //go to high scores
@@ -214,14 +214,3 @@ function saveLastScore() {
 
 init();
 
-// GIVEN I am taking a code quiz
-// WHEN I click the start button
-// THEN a timer starts and I am presented with a question
-// WHEN I answer a question
-// THEN I am presented with another question
-// WHEN I answer a question incorrectly
-// THEN time is subtracted from the clock
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over
-// THEN I can save my initials and my score
