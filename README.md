@@ -10,7 +10,7 @@ A timed quiz using JavaScript skills. With this quiz you are given 30 seconds to
 
 ## Visuals
 ![Code Quiz](images/psych.png)
-![Scores] (images/scores.png)
+![Scores](images/scores.png) 
 ## Resources
 - [Live Site](https://selaprivette.github.io/CodeQuiz/) 
 - [Repository](https://github.com/selaprivette/CodeQuiz)
